@@ -56,7 +56,7 @@ function TimelineItem({ date, title, description, delay }: TimelineItemProps) {
 
 export default function page() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <section className="h-screen flex items-center justify-center">
       <div className="text-center">
         <motion.div
@@ -220,6 +220,6 @@ export default function page() {
         </div>
       </div>
     </section>
-    </div>
+    </main>
   )
 }

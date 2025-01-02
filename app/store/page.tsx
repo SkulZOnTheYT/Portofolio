@@ -1,8 +1,24 @@
+import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { Lightbulb, Zap, Shield } from 'lucide-react';
-import React from 'react';
 
+export const metadata : Metadata = {
+  title: 'Store',
+  description: 'SkulZ Store hadir sebagai solusi mudah dan lengkap untuk berbagai kebutuhan jasa Anda. Temukan beragam layanan profesional, mulai dari desain grafis, penulisan, pemasaran digital, hingga layanan rumah tangga, semua dalam satu platform.',
+  keywords: 'SkulZ Store, jasa, desain grafis, pemasaran digital',
+  robots: {
+    index: false,
+    follow: true,
+    noarchive: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+    },
+  },
+}
 
 const features = [
   {

@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-white text-gray-600 py-12 px-4 sm:px-6 lg:px-8">
       <div className="border-t border-gray-200">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mt-2">
           <p className="text-gray-500">&copy; 2024 SkulZOnTheYT. All Rights Reserved</p>
           <div className="flex space-x-6">
             <Link href="#" className="text-gray-400 hover:text-gray-500">
