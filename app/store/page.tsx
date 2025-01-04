@@ -66,7 +66,7 @@ export default function page() {
             Platform kami membantu Anda mengubah ide-ide kreatif menjadi produk yang sukses. Mulai perjalanan Anda hari ini!
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="wa.me/628982696987">
+            <Link href="https://wa.me/628982696987">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg w-full sm:w-auto text-lg">
                 Mulai Gratis
               </button>

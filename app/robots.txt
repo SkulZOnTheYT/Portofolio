@@ -1,7 +1,8 @@
 # Block all crawlers for /accounts
 User-agent: *
-Disallow: /accounts
+Disallow: /api/
 
 # Allow all crawlers
 User-agent: *
 Allow: /
+Sitemap: https://portofolio-zeta-black.vercel.app/sitemap.xml

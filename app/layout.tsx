@@ -1,6 +1,5 @@
 import './globals.css' 
 import type { Metadata } from 'next'
-import { Provider } from '@/components/ui/provider'
 import Navbar from './component/Navbar'
 import favicon from './favicon.ico'
 import Footer from './component/Footer'
@@ -33,11 +32,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <link rel="shortcut icon" href={favicon.src} />
       <body>
-        <Provider>
           <Navbar />
             {children}
           <Footer />
-        </Provider>
       </body>
     </html>
   )

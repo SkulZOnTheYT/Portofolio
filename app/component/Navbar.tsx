@@ -3,20 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import Link from "next/link";
 import Image from 'next/image';
-import { DrawerBackdrop,
-  DrawerBody,
-  DrawerCloseTrigger,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerRoot,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { useRouter } from 'next/navigation';
+import { Drawer, Sidebar } from "flowbite-react";
 import { Home, ShoppingBag, LogIn } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isClicked, setIsClicked] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpen = () => setIsOpen(true);
+  const handleClose = () => setIsOpen(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (isClicked) {
@@ -27,9 +23,14 @@ const Navbar: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [isClicked]);
+
+  const handleNavigation = (path: string) => {
+    router.push(path);
+    handleClose();
+  };
+
   return (
-  <DrawerRoot size="xs">
-    <DrawerBackdrop />
+  <>
     <nav className="sticky top-0 z-50 bg-white shadow-md border-gray-200 px-2 sm:px-4 rounded dark:bg-gray-900">
       <div className="container py-2 flex flex-wrap justify-between items-center mx-auto px-4">
         <Link href="https://github.com/SkulZOnTheYT" className="flex items-center gap-3">
@@ -41,8 +42,7 @@ const Navbar: React.FC = () => {
            />
           <span className="font-semibold text-xl tracking-tight italic">SkulZ</span>
         </Link>
-        <DrawerTrigger asChild>
-        <button className="relative group md:hidden">
+        <button onClick={handleOpen} className="relative group md:hidden">
           <div className={`relative flex overflow-hidden items-center justify-center rounded-lg w-10 h-10 transform transition-all bg-transparent border-2 border-gray-300 ${isClicked ? 'border-[4px]' : 'hover:border-[4px]'} border-opacity-30 duration-200 shadow-sm cursor-pointer`} onClick={() => setIsClicked(true)}>
             <div className="flex flex-col justify-between w-3 h-3 transform transition-all duration-300 origin-center overflow-hidden">
               <div className={`bg-slate-700 h-[1px] w-3 transform transition-all duration-300 origin-left ${isClicked ? 'translate-x-1.5' : ''}`}></div>
@@ -56,7 +56,6 @@ const Navbar: React.FC = () => {
             </div>
           </div>
         </button>
-        </DrawerTrigger>
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
@@ -72,32 +71,32 @@ const Navbar: React.FC = () => {
         </div>
       </div>
     </nav>
-    <DrawerContent offset={4} rounded="md">
-      <DrawerCloseTrigger />
-      <DrawerHeader>
-        <DrawerTitle>Menu</DrawerTitle>
-      </DrawerHeader>
-      <DrawerBody className="p-4 pb-0">
-        <div className="flex flex-col space-y-4">
-          <Link href="/" className="flex items-center ml-6 space-x-2 text-gray-700 hover:text-blue-700 transition-colors">
-            <Home size={20} />
-            <span>Home</span>
-          </Link>
-          <Link href="/store" className="flex items-center ml-6 space-x-2 text-gray-700 hover:text-blue-700 transition-colors">
-            <ShoppingBag size={20} />
-            <span>Store</span>
-          </Link>
-          <Link href="/login" className="flex items-center ml-6 space-x-2 text-gray-700 hover:text-blue-700 transition-colors">
-            <LogIn size={20} />
-            <span>Login</span>
-          </Link>
-        </div>
-      </DrawerBody>
-      <DrawerFooter className="p-4 text-center text-sm text-gray-500 border-t border-gray-200">
-        © 2024 SkulZ. All rights reserved.
-      </DrawerFooter>
-  </DrawerContent>
-    </DrawerRoot>
+    <Drawer open={isOpen} onClose={handleClose} className="mt-14 w-72">
+        <Drawer.Items>
+          <Sidebar
+            aria-label="Sidebar with multi-level dropdown example"
+            className="[&>div]:bg-transparent [&>div]:p-0"
+          >
+            <div className="flex h-full flex-col justify-between py-6 ml-6">
+                <Sidebar.Items>
+                  <button onClick={() => handleNavigation('/')} className="flex items-center space-x-4 mb-8 text-gray-700 text-lg hover:text-blue-700 transition-colors">
+                    <Home size={24} />
+                    <span>Home</span>
+                  </button>
+                  <button onClick={() => handleNavigation('/store')} className="flex items-center space-x-4 mb-8 text-gray-700 text-lg hover:text-blue-700 transition-colors">
+                    <ShoppingBag size={24} />
+                    <span>Store</span>
+                  </button>
+                  <button onClick={() => handleNavigation('/login')} className="flex items-center space-x-4 text-gray-700 text-lg hover:text-blue-700 transition-colors">
+                    <LogIn size={24} />
+                    <span>Login</span>
+                  </button>
+                </Sidebar.Items>
+            </div>
+          </Sidebar>
+        </Drawer.Items>
+      </Drawer>
+    </>
   );
 };
 
