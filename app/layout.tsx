@@ -10,7 +10,15 @@ export const metadata : Metadata = {
     template: '%s | SkulZ Portofolio Web', 
     default: 'Home | SkulZ Portofolio Web'
   },
-  description: 'Website portofolio SkulZ',
+
+  openGraph: {
+    description: 'Website portofolio SkulZ',
+    images: [],
+  },
+
+  metadataBase: new URL('https://skulz-portofolio.vercel.app'),
+  keywords: ['skulz portofolio', 'web skulz', 'skulz', 'SkulZOnTheYT', 'sekulzeet'],
+  
   robots: {
     index: false,
     follow: true,
