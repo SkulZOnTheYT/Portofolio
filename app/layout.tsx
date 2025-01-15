@@ -16,6 +16,10 @@ export const metadata : Metadata = {
     images: [],
   },
 
+  verification: {
+    google: 'PRtu8BiY2B1RbWng9bn1BzbxtfEUkV7GAcoOHmQL4U0',
+  },
+
   metadataBase: new URL('https://skulz-portofolio.vercel.app'),
   keywords: ['skulz portofolio', 'web skulz', 'skulz', 'SkulZOnTheYT', 'sekulzeet'],
   
