@@ -66,7 +66,7 @@ export default function page() {
           className="mb-8"
         >
           <Image
-            src="https://avatars.githubusercontent.com/u/92020118?v=4"
+            src="/skulz.jpg"
             alt="Foto Profil"
             width={200}
             height={200}

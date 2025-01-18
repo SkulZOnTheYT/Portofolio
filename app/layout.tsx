@@ -11,15 +11,11 @@ export const metadata : Metadata = {
     default: 'Home | SkulZ Portofolio Web'
   },
 
-  openGraph: {
-    description: 'Website portofolio SkulZ',
-    images: [],
-  },
-
   verification: {
     google: 'PRtu8BiY2B1RbWng9bn1BzbxtfEUkV7GAcoOHmQL4U0',
   },
 
+  description: 'Website portofolio SkulZ',
   metadataBase: new URL('https://skulz-portofolio.vercel.app'),
   keywords: ['skulz portofolio', 'web skulz', 'skulz', 'SkulZOnTheYT', 'sekulzeet'],
   
@@ -41,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <link rel="shortcut icon" href={favicon.src} />
       <body>
           <Navbar />

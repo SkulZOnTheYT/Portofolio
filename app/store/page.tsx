@@ -80,11 +80,12 @@ export default function page() {
         </div>
         <div className="relative h-[400px] lg:h-[500px] hidden lg:block">
           <Image
-            src="https://cdn.dribbble.com/userupload/3898109/file/original-1e15ac48305378a87fc4997b2ad4c0ee.gif"
+            src="/ilustrasi-ide.gif"
             alt="Hero Image"
             className="object-cover rounded-lg w-full h-auto"
             width={0}
             height={0}
+            unoptimized
           />
         </div>
       </div>

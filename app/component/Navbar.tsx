@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
       <div className="container py-2 flex flex-wrap justify-between items-center mx-auto px-4">
         <Link href="https://github.com/SkulZOnTheYT" className="flex items-center gap-3">
           <Image
-            src="https://avatars.githubusercontent.com/u/92020118?v=4"
+            src="/skulz.jpg"
             alt="Your Logo"
             width={50}
             height={50}
