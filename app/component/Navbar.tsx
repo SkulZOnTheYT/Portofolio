@@ -1,32 +1,21 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from "next/link";
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Drawer, Sidebar } from "flowbite-react";
-import { Home, ShoppingBag, LogIn } from 'lucide-react';
+import { Home, ShoppingBag, LogIn, Menu } from 'lucide-react';
 
 const Navbar: React.FC = () => {
-  const [isClicked, setIsClicked] = useState(false);
+
   const [isOpen, setIsOpen] = useState(false);
-  const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
+  const toggleDrawer = () => setIsOpen(!isOpen);
   const router = useRouter();
-
-  useEffect(() => {
-    if (isClicked) {
-      const timer = setTimeout(() => {
-        setIsClicked(false);
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [isClicked]);
 
   const handleNavigation = (path: string) => {
     router.push(path);
-    handleClose();
+    toggleDrawer();
   };
 
   return (
@@ -42,19 +31,8 @@ const Navbar: React.FC = () => {
            />
           <span className="font-semibold text-xl tracking-tight italic">SkulZ</span>
         </Link>
-        <button onClick={handleOpen} className="relative group md:hidden">
-          <div className={`relative flex overflow-hidden items-center justify-center rounded-lg w-10 h-10 transform transition-all bg-transparent border-2 border-gray-300 ${isClicked ? 'border-[4px]' : 'hover:border-[4px]'} border-opacity-30 duration-200 shadow-sm cursor-pointer`} onClick={() => setIsClicked(true)}>
-            <div className="flex flex-col justify-between w-3 h-3 transform transition-all duration-300 origin-center overflow-hidden">
-              <div className={`bg-slate-700 h-[1px] w-3 transform transition-all duration-300 origin-left ${isClicked ? 'translate-x-1.5' : ''}`}></div>
-              <div className={`bg-slate-700 h-[1px] w-3 rounded transform transition-all duration-300 ${isClicked ? 'translate-x-1.5' : ''} delay-75`}></div>
-              <div className={`bg-slate-700 h-[1px] w-3 transform transition-all duration-300 origin-left ${isClicked ? 'translate-x-1.5' : ''} delay-150`}></div>
-
-              <div className={`absolute items-center justify-between transform transition-all duration-500 top-0.75 ${isClicked ? 'translate-x-0 w-3.5' : '-translate-x-1.5 w-0'} flex`}>
-                <div className={`absolute bg-slate-700 h-[1px] w-2 transform transition-all duration-500 ${isClicked ? 'rotate-45' : 'rotate-0'} delay-300`}></div>
-                <div className={`absolute bg-slate-700 h-[1px] w-2 transform transition-all duration-500 ${isClicked ? '-rotate-45' : 'rotate-0'} delay-300`}></div>
-              </div>
-            </div>
-          </div>
+        <button onClick={toggleDrawer} className="relative md:hidden p-2 rounded-md transition-all duration-300 ease-in-out hover:border hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300">
+          <Menu size={24} />
         </button>
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -71,7 +49,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
     </nav>
-    <Drawer open={isOpen} onClose={handleClose} className="mt-14 w-72">
+    <Drawer open={isOpen} onClose={toggleDrawer} className="mt-14 w-72">
         <Drawer.Items>
           <Sidebar
             aria-label="Sidebar with multi-level dropdown example"

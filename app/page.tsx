@@ -2,27 +2,20 @@
 
 import React from 'react'
 import Image from 'next/image'
+import Hobby from './component/Hobby'
 import { motion } from 'framer-motion'
-import { Camera, Music, Book, Plane } from 'lucide-react'
 import { Timeline } from "flowbite-react";
 import { Calendar } from 'lucide-react';
 
 const skills = [
-  { name: 'JavaScript', level: 50.40 },
-  { name: 'TypeScript', level: 16.95 },
-  { name: 'SCSS', level: 11.39 },
-  { name: 'Python', level: 5.24 },
-  { name: 'PHP', level: 4.10 },
-  { name: 'MDX', level: 1.29 },
-  { name: 'Java', level: 0.85 },
-  { name: 'HTML', level: 0.70 },
-]
-
-const interests = [
-  { name: 'Fotografi', icon: Camera },
-  { name: 'Musik', icon: Music },
-  { name: 'Membaca', icon: Book },
-  { name: 'Traveling', icon: Plane },
+  { name: 'JavaScript', level: 79.41 },
+  { name: 'Python', level: 7.52 },
+  { name: 'PHP', level: 5.89 },
+  { name: 'TypeScript', level: 5.18 },
+  { name: 'Java', level: 1.22 },
+  { name: 'C#', level: 0.38 },
+  { name: 'CSS', level: 0.27 },
+  { name: 'ShaderLab', level: 0.12 },
 ]
 
 interface TimelineItemProps {
@@ -152,32 +145,8 @@ export default function page() {
       </div>
     </section>
 
-    <section className="py-20 bg-white text-gray-800">
-      <div className="container mx-auto px-4">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-4xl font-bold mb-12 text-center"
-        >
-          Hobi & Minat
-        </motion.h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
-          {interests.map((interest, index) => (
-            <motion.div
-              key={interest.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-center"
-            >
-              <interest.icon className="w-16 h-16 mx-auto mb-4 text-indigo-600" />
-              <h3 className="text-xl font-semibold">{interest.name}</h3>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+    {/* Karena terlalu panjang jadi saya pisah */}
+    <Hobby />
 
     <section className="py-20 bg-white text-gray-800">
       <div className="container mx-auto px-4">
