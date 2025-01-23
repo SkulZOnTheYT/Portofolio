@@ -43,12 +43,12 @@ export default function HobbyModals() {
   ]
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-6 p-6 py-20">
       <motion.h2 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="text-4xl font-bold text-gray-900 dark:text-white mb-8 text-center">Hobby Saya</motion.h2>
+      className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">Hobby Saya</motion.h2>
 
       <div className="flex space-x-4 justify-center">
         {hobbies.map((hobby, index) => (
@@ -56,7 +56,8 @@ export default function HobbyModals() {
             <motion.div
               variants={iconVariants}
               initial="hidden"
-              animate="visible"
+              whileInView="visible"
+              viewport={{ amount: 0.8 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
               <Button onClick={() => setOpenModal(hobby.name)} className="p-2">

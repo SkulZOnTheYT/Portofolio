@@ -57,15 +57,15 @@ const Navbar: React.FC = () => {
           >
             <div className="flex h-full flex-col justify-between py-6 ml-6">
                 <Sidebar.Items>
-                  <button onClick={() => handleNavigation('/')} className="flex items-center space-x-4 mb-8 text-gray-700 text-lg hover:text-blue-700 transition-colors">
+                  <button onClick={() => handleNavigation('/')} className="flex items-center space-x-8 mb-8 text-gray-700 text-lg hover:text-blue-700 transition-colors">
                     <Home size={24} />
                     <span>Home</span>
                   </button>
-                  <button onClick={() => handleNavigation('/store')} className="flex items-center space-x-4 mb-8 text-gray-700 text-lg hover:text-blue-700 transition-colors">
+                  <button onClick={() => handleNavigation('/store')} className="flex items-center space-x-8 mb-8 text-gray-700 text-lg hover:text-blue-700 transition-colors">
                     <ShoppingBag size={24} />
                     <span>Store</span>
                   </button>
-                  <button onClick={() => handleNavigation('/login')} className="flex items-center space-x-4 text-gray-700 text-lg hover:text-blue-700 transition-colors">
+                  <button onClick={() => handleNavigation('/login')} className="flex items-center space-x-8 text-gray-700 text-lg hover:text-blue-700 transition-colors">
                     <LogIn size={24} />
                     <span>Login</span>
                   </button>
