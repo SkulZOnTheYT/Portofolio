@@ -1,46 +1,43 @@
-'use client'
+"use client"
 
 import React from "react"
 import { signIn } from "next-auth/react"
-import { useRouter } from "next/navigation"
 import "../globals.css"
 
-
 export default function LoginPage() {
-  const router = useRouter()
-
-  const handleOAuthSignIn = async (provider: string) => {
+  const handleSubmit = async (provider: string) => {
     try {
-      const result = await signIn(provider, { callbackUrl: "/home" })
+      const result = await signIn(provider, { callbackUrl: "/dashboard", redirect: false })
+      console.log("SignIn result:", result)
       if (result?.error) {
-        console.error("OAuth sign in error:", result.error)
+        console.error("SignIn error:", result.error)
       }
     } catch (error) {
-      console.error("Sign in error:", error)
+      console.error("SignIn error:", error)
     }
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="area">
-			<ul className="circles">
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-			</ul>
-		</div>
+        <ul className="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
       <div className="bg-white p-8 rounded-lg shadow-md w-96 z-10">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Login atau Daftar</h2>
         <div className="space-y-4">
           <button
-            onClick={() => handleOAuthSignIn("google")}
+            onClick={() => handleSubmit("google")}
             className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
@@ -49,7 +46,7 @@ export default function LoginPage() {
             <span>Lanjutkan dengan Google</span>
           </button>
           <button
-            onClick={() => handleOAuthSignIn("github")}
+            onClick={() => handleSubmit("github")}
             className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -64,6 +61,6 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
