@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             disallow: '/api/',
             allow: '/',
         },
-        sitemap: 'https://skulz-portofolio.vercel.app/sitemap.xml',
+        sitemap: 'https://skulz.vercel.app/sitemap.xml',
     }
 }

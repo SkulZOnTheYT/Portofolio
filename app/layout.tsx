@@ -16,7 +16,7 @@ export const metadata : Metadata = {
   },
 
   description: 'Website portofolio SkulZ',
-  metadataBase: new URL('https://skulz-portofolio.vercel.app'),
+  metadataBase: new URL('https://skulz.vercel.app'),
   keywords: ['skulz portofolio', 'web skulz', 'skulz', 'SkulZOnTheYT', 'sekulzeet'],
   
   robots: {
