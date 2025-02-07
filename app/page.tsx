@@ -3,6 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Hobby from './component/Hobby'
+import Comment from './component/Comment'
 import { motion } from 'framer-motion'
 import { Timeline } from "flowbite-react";
 import { Calendar } from 'lucide-react';
@@ -187,6 +188,21 @@ export default function page() {
             />
           </Timeline>
         </div>
+        <section className="py-20 bg-gray-100 text-gray-800">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-bold mb-12 text-center"
+          >
+            Comments
+          </motion.h2>
+          <div className="max-w-4xl mx-auto">
+            <Comment />
+          </div>
+        </div>
+      </section>
       </div>
     </section>
     </main>

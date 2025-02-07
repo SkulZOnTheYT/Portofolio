@@ -4,6 +4,7 @@ import Navbar from './component/Navbar'
 import favicon from './favicon.ico'
 import Footer from './component/Footer'
 import React from 'react'
+import { Provider } from './component/Providers'
 
 export const metadata : Metadata = {
   title: { 
@@ -40,9 +41,11 @@ export default function RootLayout({
     <html lang="en">
       <link rel="shortcut icon" href={favicon.src} />
       <body>
+        <Provider>
           <Navbar />
             {children}
           <Footer />
+        </Provider>
       </body>
     </html>
   )
