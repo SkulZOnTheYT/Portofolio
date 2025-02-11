@@ -112,7 +112,7 @@ const Comment: React.FC = () => {
           </div>
         </div>
 
-        <div ref={commentsContainerRef} className="flex-grow overflow-y-auto overflow-x-hidden pr-2">
+        <div ref={commentsContainerRef} className="grow overflow-y-auto overflow-x-hidden pr-2">
           <ul className="flex flex-col-reverse gap-2">
             {comments.map((comment) => (
               <li key={comment.id} className="rounded-lg border border-gray-200 dark:border-gray-700 p-3">
@@ -132,7 +132,7 @@ const Comment: React.FC = () => {
             placeholder="Message..."
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
-            className="flex-grow font-poppins"
+            className="grow font-poppins"
           />
           <Button type="submit" color="light" title="Send Your Message...">
             <ArrowRightIcon className="h-5 w-5" />

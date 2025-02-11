@@ -40,17 +40,17 @@ export default function SimpleNoteApp() {
           placeholder="Judul"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 mb-2 border rounded"
+          className="w-full p-2 mb-2 border rounded-sm"
         />
         <textarea
           placeholder="Isi catatan"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="w-full p-2 mb-2 border rounded"
+          className="w-full p-2 mb-2 border rounded-sm"
         />
         <button 
           onClick={addNote}
-          className="bg-black text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-black text-white px-4 py-2 rounded-sm hover:bg-blue-600"
         >
           Tambah Catatan
         </button>
@@ -58,12 +58,12 @@ export default function SimpleNoteApp() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {notes.map((note) => (
-          <div key={note.id} className="border p-4 rounded shadow">
+          <div key={note.id} className="border p-4 rounded-sm shadow-sm">
             <h2 className="text-xl font-bold mb-2">{note.title}</h2>
             <p className="mb-4">{note.content}</p>
             <button 
               onClick={() => deleteNote(note.id)}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              className="bg-red-500 text-white px-4 py-2 rounded-sm hover:bg-red-600"
             >
               Hapus
             </button>
