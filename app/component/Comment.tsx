@@ -3,9 +3,13 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
 import { collection, addDoc, onSnapshot, query, orderBy, Timestamp } from "firebase/firestore"
-import { db } from "../firebase"
-import { Button, TextInput, Card } from "flowbite-react"
+import { signInAnonymously, onAuthStateChanged } from "firebase/auth"
+import { db, auth } from "../firebase"
 import { ArrowRightIcon } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface Comment {
   id?: string
@@ -18,7 +22,7 @@ const Comment: React.FC = () => {
   const [comments, setComments] = useState<Comment[]>([])
   const [newComment, setNewComment] = useState<string>("")
   const [username, setUsername] = useState<string>("")
-  const commentsContainerRef = useRef<null | HTMLDivElement>(null)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const commentsEndRef = useRef<null | HTMLDivElement>(null)
 
   const generateAnonymousUsername = () => {
@@ -38,9 +42,23 @@ const Comment: React.FC = () => {
     } else {
       setUsername(storedUsername)
     }
-  }, []) // Removed generateAnonymousUsername from dependencies
 
-  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true)
+        initializeFirestoreListeners()
+      } else {
+        setIsAuthenticated(false)
+        signInAnonymously(auth).catch((error) => {
+          console.error("Error signing in anonymously:", error)
+        })
+      }
+    })
+
+    return () => unsubscribe()
+  }, []) //Fixed: Removed generateAnonymousUsername from dependencies
+
+  const initializeFirestoreListeners = () => {
     const commentsRef = collection(db, "comments")
     const q = query(commentsRef, orderBy("timestamp", "desc"))
 
@@ -56,20 +74,16 @@ const Comment: React.FC = () => {
       setComments(fetchedComments)
     })
 
-    return () => unsubscribe()
-  }, [])
+    return unsubscribe
+  }
 
   useEffect(() => {
-    const chatContainer = commentsContainerRef.current
-
-    if (chatContainer) {
-      chatContainer.scrollTop = chatContainer.scrollHeight
-    }
-  }, [comments])
+    commentsEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [commentsEndRef]) //Fixed: Removed comments from dependencies
 
   const handleSubmitComment = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault() // Prevent the default form submission
-    if (newComment.trim() === "") return
+    e.preventDefault()
+    if (newComment.trim() === "" || !isAuthenticated) return
 
     try {
       await addDoc(collection(db, "comments"), {
@@ -78,7 +92,7 @@ const Comment: React.FC = () => {
         username: username,
       })
 
-      setNewComment("") // Reset the input field
+      setNewComment("")
     } catch (error) {
       console.error("Error adding comment: ", error)
     }
@@ -102,42 +116,44 @@ const Comment: React.FC = () => {
     return formattedText
   }
 
+  if (!isAuthenticated) {
+    return <div>Authenticating...</div>
+  }
+
   return (
     <div className="max-w-2xl mx-auto p-4 w-full" data-chat-component="true">
-      <Card className="p-4 mb-4 h-[500px] flex flex-col">
-        <div className="flex justify-between items-center mb-4">
-          <div>
-            <h2 className="text-2xl font-bold font-poppins">Anonymous Chat</h2>
-            <p className="text-sm text-gray-500 font-poppins">Your username: {username}</p>
-          </div>
-        </div>
-
-        <div ref={commentsContainerRef} className="grow overflow-y-auto overflow-x-hidden pr-2">
-          <ul className="flex flex-col-reverse gap-2">
-            {comments.map((comment) => (
-              <li key={comment.id} className="rounded-lg border border-gray-200 dark:border-gray-700 p-3">
-                <p className="font-poppins whitespace-pre-wrap">{formatLongText(comment.text)}</p>
-                <p className="text-sm text-gray-500 font-poppins mt-1">
-                  {comment.username} - {comment.timestamp.toDate().toLocaleString()}
-                </p>
-              </li>
-            ))}
-            <div ref={commentsEndRef} />
-          </ul>
-        </div>
-
-        <form onSubmit={handleSubmitComment} className="flex gap-2 mt-4">
-          <TextInput
-            type="text"
-            placeholder="Message..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            className="grow font-poppins"
-          />
-          <Button type="submit" color="light" title="Send Your Message...">
-            <ArrowRightIcon className="h-5 w-5" />
-          </Button>
-        </form>
+      <Card className="h-[500px] flex flex-col">
+        <CardHeader>
+          <CardTitle>Anonymous Chat</CardTitle>
+          <p className="text-sm text-muted-foreground">Your username: {username}</p>
+        </CardHeader>
+        <CardContent className="flex-grow flex flex-col">
+          <ScrollArea className="flex-grow">
+            <ul className="flex flex-col-reverse gap-2">
+              {comments.map((comment) => (
+                <li key={comment.id} className="rounded-lg border p-3">
+                  <p className="whitespace-pre-wrap">{formatLongText(comment.text)}</p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {comment.username} - {comment.timestamp.toDate().toLocaleString()}
+                  </p>
+                </li>
+              ))}
+              <div ref={commentsEndRef} />
+            </ul>
+          </ScrollArea>
+          <form onSubmit={handleSubmitComment} className="flex gap-2 mt-4">
+            <Input
+              type="text"
+              placeholder="Message..."
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              className="flex-grow"
+            />
+            <Button type="submit" size="icon" title="Send Your Message...">
+              <ArrowRightIcon className="h-5 w-5" />
+            </Button>
+          </form>
+        </CardContent>
       </Card>
     </div>
   )
