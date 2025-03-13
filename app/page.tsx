@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import Image from "next/image"
 import Hobby from "./component/Hobby"
 import Comment from "./component/Comment"
@@ -190,7 +190,7 @@ export default function Page() {
           >
             Comments
           </motion.h2>
-          <div className="max-w-4xl mx-auto">
+          <div className=" mx-auto">
             <Comment />
           </div>
         </div>

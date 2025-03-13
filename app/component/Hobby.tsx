@@ -55,7 +55,7 @@ export default function HobbyModals() {
         Hobby Saya
       </motion.h2>
 
-      <div className="flex space-x-6 justify-center flex-wrap">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 gap-x-0 md:gap-6 justify-items-center max-w-4xl mx-auto px-10">
       {hobbies.map((hobby, index) => (
         <TooltipProvider key={hobby.name}>
           <Tooltip>
@@ -71,9 +71,9 @@ export default function HobbyModals() {
                   variant="outline"
                   size="lg"
                   onClick={() => setOpenModal(hobby.name)}
-                  className="px-6 py-3 flex items-center space-x-2"
+                  className="px-6 py-3 md:px-8 md:py-6 flex items-center space-x-2"
                 >
-                  <hobby.icon className="h-6 w-6" />
+                  <hobby.icon className="h-6 w-6 md:h-8 md:w-8" />
                   <span>{hobby.name}</span>
                 </Button>
               </motion.div>
